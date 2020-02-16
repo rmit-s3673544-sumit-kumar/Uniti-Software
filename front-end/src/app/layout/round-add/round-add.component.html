@@ -1,0 +1,326 @@
+<mat-card style="background-color: #4caf50;color:white">Create Round</mat-card>
+
+ 
+
+<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button> -->
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  
+  <mat-step [stepControl]="dateFrom">
+    <form [formGroup]="dateFrom" (ngSubmit)="getEmployeeList(dateFrom.value)" nonvalidate>
+      <ng-template matStepLabel>Select Date</ng-template>
+      <br>
+      <br>
+      <br>
+      <p> 
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker1" placeholder="Select Date" formControlName="date"  (change)="getEmployeeList(date)" required>
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </p>
+      <br>
+      <br>
+      <br>
+      <div>
+        <button mat-raised-button class="btn btn-success"  type="Submit" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Select Employee</ng-template>
+      
+      
+      <div class="mat-elevation-z8" style="margin-top: 4%;">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        
+          <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+         
+         
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef class="heading-color width-25">Select</th>
+            <td mat-cell *matCellDef="let element">  
+              <mat-checkbox [checked]="element.empId==onchecked" [disabled]="element.status=='busy'" (change)="checkBoxEvent(element.empId,element.firstName)"></mat-checkbox>
+            </td>
+          </ng-container> 
+        
+          <ng-container matColumnDef="empId">
+            <th mat-header-cell *matHeaderCellDef class="heading-color width-25">Emp No.</th>
+            <td mat-cell *matCellDef="let element"> {{element.empId}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef class="heading-color width-25"> First Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+          </ng-container> 
+         
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef class="heading-color width-25"> Status </th>
+            <td mat-cell *matCellDef="let element" [ngStyle]="{'color':element.status === 'busy' ? 'red' : 'green' }"> {{element.status}} </td>
+          </ng-container>
+        
+          
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table> 
+        
+        </div>
+        <br>
+        <br>
+        <br>
+
+
+      <div>
+        <button mat-raised-button class="btn btn-danger" matStepperPrevious (click)="backToDate()">Back</button>
+        <button mat-raised-button class="btn btn-success" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Add Visits</ng-template>
+  
+    <br>
+    <br>
+<div class="row">
+  <div class="col-md-3 borderStyle">
+    <div>Worker Name : <span class="color-red">{{checkedName}} </span></div>
+  </div>
+  <div class="col-md-6"></div>
+  <div class="col-md-3 borderStyle">
+    Date : <span class="color-red">{{todayDate | date}} </span>
+  </div>
+</div>
+<br>
+<br>
+<button mat-raised-button class="btn btn-success" (click)="addItem()" >add +</button> 
+<br>
+<br>
+<br>
+
+<form [formGroup]="roundForm" (ngSubmit)="onSubmit(roundForm.value)" nonvalidate>
+<table class="table table-bordered table-responsive">
+  <thead FormGroupName="employee">
+  <tr>
+    <th class="field-label col-xs-2 active heading-color">Client</th>
+    <th class="field-label col-xs-1 active heading-color">Start</th>
+    <th class="field-label col-xs-1 active heading-color">End</th>
+    <th class="field-label col-xs-3 active heading-color">Address</th>
+    <th class="field-label col-xs-1 active heading-color">Mins</th>
+    <th class="field-label col-xs-1 active heading-color">Done</th>
+    <th class="field-label col-xs-2 active heading-color width-15">FTA Reason</th>
+    <th class="field-label col-xs-1 active heading-color">Cost</th>
+  </tr>
+  </thead>
+  <tbody formArrayName="visit" *ngFor="let visit of roundForm.get('visit').controls; let i = index;" >
+  <tr [formGroupName]="i">
+    <!-- <th scope="row">{{ i + 1 }}</th> -->
+   
+    <td>  
+      <!-- <mat-form-field> <input matInput formControlName="cilent" class="formFieldWidth100"> </mat-form-field> -->
+      <input type="text" class="form-control width100" formControlName="client">
+    </td>
+    <td>
+      <input class="form-control width100" [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3" formControlName="startTime">
+      <owl-date-time [pickerType]="'timer'" #dt3></owl-date-time>
+    </td> 
+    <td> 
+      <input class="form-control width100" [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4" formControlName="endTime">
+      <owl-date-time [pickerType]="'timer'" #dt4></owl-date-time>
+    </td>
+    <td>
+      <!-- <mat-form-field> <input matInput formControlName="address"> </mat-form-field> -->
+      <input type="text" class="form-control width100" formControlName="address">
+    </td>
+    <td>
+      <!-- <mat-form-field> <input matInput formControlName="duration"> </mat-form-field> -->
+      <input type="text" class="form-control width100" formControlName="duration">
+    </td>
+    <td> 
+      <mat-checkbox [checked]="status" formControlName="status" style="margin-left: 25%;" [disabled]='true'></mat-checkbox> 
+    </td>
+    <td>
+      <!-- <mat-form-field> <input matInput formControlName="ftareason"> </mat-form-field> -->
+      {{ftareason}}
+    </td>
+    
+    <td>
+      <!-- <mat-form-field> <input matInput formControlName="cost"> </mat-form-field> -->
+      <input type="text" class="form-control width100" formControlName="cost">
+    </td>
+    <i class="material-icons" (click)="removeRow(i)">
+      clear
+      </i>
+  </tr>
+  </tbody>
+</table>
+    
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-md-6"></div>
+      <div class="col-md-3 borderStyle">
+        <div>Admin Name : <span class="color-red">{{loggedInUser}} </span></div>
+      </div>
+    
+      <div class="col-md-3 borderStyle">
+        Date : <span class="color-red">{{todayDate | date}} </span> 
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div>
+      <button mat-raised-button class="btn btn-danger"  matStepperPrevious>Back</button>
+      <button mat-raised-button class="btn btn-success"  type="Submit">Submit</button>
+
+      <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+    </div>
+  </form>
+  </mat-step>
+
+</mat-horizontal-stepper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <mat-card>
+  
+    <form [formGroup]="dateFrom" class="example-form" (ngSubmit)="onSubmit(dateFrom.value)" nonvalidate>
+       <p> 
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker1" placeholder="Select Date" formControlName="date" required>
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </p>
+    </form> 
+</mat-card> -->
+
+
+<!-- <mat-card style="background-color: #4caf50;color:white">Employee List</mat-card> <br>
+
+<div class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8"> -->
+
+  <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+ 
+ 
+  <!-- <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef class="heading-color width-25">Select</th>
+    <td mat-cell *matCellDef="let element">  
+      <mat-checkbox [checked]="element.id==onchecked" (change)="herewego(element.id)"></mat-checkbox>
+    </td>
+  </ng-container> 
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef class="heading-color width-25">Emp No.</th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef class="heading-color width-25"> First Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+  </ng-container> 
+ 
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef class="heading-color width-25"> Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+  </ng-container>
+
+  
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table> 
+
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  
+<div style="margin: 0% 20% 20% 20%">
+  <form [formGroup]="profileForm" class="example-form" (ngSubmit)="onSubmit(profileForm.value)" nonvalidate>
+
+    <p>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="First Name" formControlName="firstName" required>
+      </mat-form-field>
+
+    </p>
+
+    <p>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Last Name" formControlName="lastName" required>
+      </mat-form-field>
+    </p>
+
+    <p>
+
+      <mat-radio-group aria-label="Gender" formControlName="gender" required>
+        <mat-radio-button value="male">Male</mat-radio-button>
+        <mat-radio-button value="female">Female</mat-radio-button>
+      </mat-radio-group>
+    </p>
+
+    <p>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email" formControlName="email" required>
+      </mat-form-field>
+    </p>
+    <p>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Date Of Birth" formControlName="dob" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-select placeholder="Technology" formControlName="technology" required>
+          <mat-option value="Angular">Angular</mat-option>
+          <mat-option value="Java">Java</mat-option>
+          <mat-option value="PHP">PHP</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Mobile Number" formControlName="mobileNumber" required>
+      </mat-form-field>
+    </p> 
+
+    <button mat-raised-button color="primary" [disabled]="!profileForm.valid">Submit</button>
+  </form>
+
+</div> -->

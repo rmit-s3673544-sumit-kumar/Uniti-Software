@@ -1,0 +1,47 @@
+<mat-card style="background-color: #3f51b5;color:white">Add Client</mat-card>
+
+<div style="margin: 2% 20% 20% 20%">
+  <form [formGroup]="profileForm" class="example-form" (ngSubmit)="onSubmit(profileForm.value)" nonvalidate>
+
+    <p>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="First Name" formControlName="firstName" required>
+        <mat-error *ngIf="hasError('firstName', 'required')">First Name is required</mat-error>
+        <mat-error *ngIf="hasError('firstName', 'pattern')">Name cannot contain numbers</mat-error>
+       
+      </mat-form-field>
+
+    </p>
+
+    <p>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Last Name" formControlName="lastName" required>
+        <mat-error *ngIf="hasError('lastName', 'required')">Last Name is required</mat-error>
+        <mat-error *ngIf="hasError('lastName', 'pattern')">Name cannot contain numbers</mat-error>
+       
+      </mat-form-field>
+    </p>
+
+    <p>
+
+      <mat-radio-group aria-label="Gender" formControlName="gender" required>
+        <mat-radio-button value="male">Male</mat-radio-button>
+        <mat-radio-button value="female">Female</mat-radio-button>
+      </mat-radio-group>
+      
+    </p>
+    <p>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Date Of Birth" formControlName="dob" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="hasError('dob', 'required')">date of birth is required</mat-error>
+     
+      </mat-form-field>
+    </p>
+  
+    <button mat-raised-button color="primary" [disabled]="!profileForm.valid">Submit</button>
+  </form>
+
+</div>

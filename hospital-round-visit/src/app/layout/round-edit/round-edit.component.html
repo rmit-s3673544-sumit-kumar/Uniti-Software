@@ -1,0 +1,144 @@
+<div>
+
+  <div class="row">
+    <div class="col-md-3 borderStyle">
+      <div *ngIf="roundList">Worker Name : <span class="color-red">{{roundList.employee.firstName | titlecase}}</span>
+      </div>
+    </div>
+    <div class="col-md-6"></div>
+    <div *ngIf="roundList" class="col-md-3 borderStyle">
+      Date : <span class="color-red">{{roundList.date | date}}</span>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div *ngIf="roleid=='1'">
+    <button mat-raised-button class="btn btn-success" (click)="addItem()">add +</button>
+  </div>
+  <br>
+  <br>
+  <br>
+
+  <form [formGroup]="roundForm" (ngSubmit)="onSubmit(roundForm.value)" nonvalidate>
+    <table class="table table-bordered table-responsive">
+      <thead FormGroupName="employee">
+        <tr>
+          <th class="field-label col-xs-2 active heading-color">Client Name</th>
+          <th class="field-label col-xs-3 active heading-color">Address</th>
+          <th class="field-label col-xs-1 active heading-color">Start</th>
+          <th class="field-label col-xs-1 active heading-color">End</th>
+          <th class="field-label col-xs-1 active heading-color">Mins</th>
+          <th *ngIf="roleid=='2'" class="field-label col-xs-1 active heading-color">Done</th>
+          <th *ngIf="roleid=='2'" class="field-label col-xs-2 active heading-color">FTA Reason</th>
+          <th class="field-label col-xs-1 active heading-color" style="width:2%;text-align: center">X</th>
+
+        </tr>
+      </thead>
+      <tbody formArrayName="visit" *ngFor="let visit of roundForm.get('visit')['controls']; let i = index;">
+        <tr [formGroupName]="i">
+          <td style="padding: 0px;">
+            <span *ngIf="roleid=='1'">
+              <mat-form-field>
+                <input type="text" aria-label="clientName" matInput formControlName="client" [matAutocomplete]="auto"
+                  (click)="getRowID(i)">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option.firstName">
+                    {{option.firstName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </span>
+            <span *ngIf="roleid=='2'">
+              {{visit.value.client}}
+            </span>
+          </td>
+          <td>
+            <span *ngIf="roleid=='1'">
+              <input type="text" class="form-control width100" formControlName="address">
+            </span>
+            <span *ngIf="roleid=='2'">
+              {{visit.value.address}}
+            </span>
+          </td>
+          <td>
+            <span *ngIf="roleid=='1'">
+              <input class="form-control width100" [ngxTimepicker]="picker" (ngModelChange)="onChangeStart($event,i)"
+                formControlName="startTime">
+              <ngx-material-timepicker #picker></ngx-material-timepicker>
+
+            </span>
+
+            <span *ngIf="roleid=='2'">{{visit.value.startTime}}</span>
+          </td>
+          <td>
+            <span *ngIf="roleid=='1'">
+              <input class="form-control width100" [ngxTimepicker]="picker2" (ngModelChange)="onChangeTo($event,i)"
+                formControlName="endTime">
+              <ngx-material-timepicker #picker2></ngx-material-timepicker>
+
+            </span>
+            <span *ngIf="roleid=='2'">{{visit.value.endTime}}</span>
+          </td>
+          <td>
+            <span *ngIf="roleid=='1'">
+              <input type="number" class="form-control width100" formControlName="duration" readonly>
+
+            </span>
+            <span *ngIf="roleid=='2'">{{visit.value.duration}}</span>
+          </td>
+          <td *ngIf="roleid=='2'">
+            <mat-checkbox [checked]="status" formControlName="status" style="margin-left: 25%;" [disabled]="roleid=='1'"
+              (change)="onStatusClick($event,i)"></mat-checkbox>
+          </td>
+
+          <td *ngIf="roleid=='2'" class="width-15">
+            <span *ngIf="roleid=='1'"> {{visit.value.ftareason}} </span>
+            <span *ngIf="roleid=='2'">
+              <input *ngIf="roleid=='2'" type="text" class="form-control width100" [disabled]="onClickDisable"
+                formControlName="ftareason">
+
+            </span>
+          </td>
+          <td style="text-align: center;">
+            <span *ngIf="roleid=='1'">
+              <i *ngIf="i>=1" class="material-icons pointercls" style="font-size:unset" (click)="removeRow(i)">
+                clear
+              </i>
+            </span>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+
+        <mat-error *ngIf="TimeError">Time is OverLapping</mat-error>
+        <br>
+        <mat-error *ngIf="FromToTimeError">Start time should be smaller than End time</mat-error>
+
+      </div>
+      <div class="col-md-3 borderStyle">
+        <div *ngIf="roundList">Admin Name : <span class="color-red">{{roundList.adminName | titlecase}}</span> </div>
+      </div>
+
+      <div class="col-md-3 borderStyle" *ngIf="roundList">
+        Date : <span class="color-red">{{roundList.updatedDate | date}}</span>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div>
+      <button mat-raised-button class="btn btn-success" [disabled]="roundForm.invalid" type="Submit">Update</button>
+
+    </div>
+  </form>
+
+</div>
+
+
+<ngx-spinner></ngx-spinner>

@@ -1,0 +1,360 @@
+#custom-search-input{
+    padding: 3px;
+    border: solid 1px #E4E4E4;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
+}
+
+#custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input .glyphicon-search{
+    font-size: 23px;
+    
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 150px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 150px;
+  background-color: #111;
+  text-align: center;
+}
+
+.container{
+  margin-top: 50px;
+  color: #fff;
+  width: 100%;
+}
+
+.fa-twitter {
+    color: #4099FF;
+}
+
+.fa-facebook {
+    color: #3B5998;
+}
+
+.fa-youtube-play {
+    color: #e52d27;
+}
+
+.fa-rss {
+    color: #FF6600;
+}
+
+.fa-vine {
+    color: #00a478;
+}
+
+.fa-flickr {
+    color: #ff0084;
+}
+
+.fa-twitch {
+    color: #6441A5;
+}
+
+.fa-linkedin {
+    color: #007bb6;
+}
+
+.fa {
+    opacity: 0.7;
+    transition: 1s;
+    -webkit-transition: 1s;
+}
+
+.fa:hover{
+    opacity: 1;
+    transition: 1s;
+    -webkit-transition: 1s;
+}
+h1 {
+        display: none !important;
+    }
+
+.about-clear{
+            clear: both;
+        }
+        
+        .imgbw{
+            filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter ….3333 0   0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+            filter: grayscale(100%);
+            -webkit-filter: grayscale(1);
+            opacity: .8;
+        }
+        
+        .static-page{
+            padding: 0 !important;
+        }
+        
+        .static-content{
+            margin: 0 !important;
+        }
+        
+        .row{
+            padding: 0 20px 30px 20px !important;
+            margin: 0 !important;
+        }
+        
+        .greybg{
+            background: #f0eee9;
+        }
+        
+        .orangebg{
+            background: #ea5b31;
+        }
+        
+        .margint{
+            margin-top: 30px !important;
+        }
+        
+        
+       
+        
+       
+        
+        h2{
+            font-weight: 400 !important;
+        }
+        
+        .bread{
+            width: 70%;
+        }
+        
+        .btn-about-layout {
+            width: 50%;
+            max-width: 530px;
+            font-size: 28px;
+            display: block;
+            margin: 30px auto;
+            line-height: 56px;
+            height: 56px;
+            background: #20ac76;
+            color: #FFFFFF;
+            border-radius: 5px;
+            transition: all .3s ease-out;
+            -moz-transition: all .3s ease-out;
+            -webkit-transition: all .3s ease-out;
+            text-decoration: none;
+        }
+        
+        .btn-about-layout:hover {
+            background: #1c9667;
+            color: #FFFFFF !important;
+            transition: all .3s ease-out;
+            -moz-transition: all .3s ease-out;
+            -webkit-transition: all .3s ease-out;
+            text-decoration: none;
+        }
+        
+        
+        .about-layout-header h2 {
+            text-align: center;
+            padding-bottom: 30px;
+        }
+        
+        .description{
+            line-height: 1.42857143 !important;
+        }
+        
+        .steps-container{
+            width: 100%;
+        }
+
+        .about-video{
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .app-android, .app-ios, .app-windows{
+            margin: 0 7px !important;
+        }
+        
+        .restaurant-logos,
+        .press-logos{
+            margin: 50px 0 30px 0;
+        }
+        
+        .restaurant-logos img,
+        .press-logos img{
+            display: inline-block;
+            vertical-align: middle;
+            margin: 5px 1.3%;
+            max-height: 70px;
+        }
+        
+        .press-logos img{
+            max-height: 50px;
+        }
+    
+        .feedback-container{
+            width: 100%;
+            max-width: 730px;
+            margin-bottom: 30px;
+            margin: 0 auto;
+        }
+        
+        .feedback-wrap{
+            position: relative;
+        }
+        
+        .feedback-wrap img{
+            width: 127px;
+            border-radius: 64px;
+            float: left;
+        }
+        
+        .feedbackbubble-wrap{
+            text-align: left;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: 40px;
+        }
+        
+        .feedbackbubble{
+            width: 100%;
+            max-width: 590px;
+            min-height: 60px;
+            padding: 10px;
+            background: #ffffff;
+            position: relative;
+            margin-top: -23px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+        }
+        
+        .feedbackbubble:before{
+            content:"";
+            position: absolute;
+            right: 100%;
+            top: 40px;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-right: 13px solid #ffffff;
+            border-bottom: 6px solid transparent;
+        }
+        
+        .feedback-userrating{
+            position: absolute;
+            bottom: -20px; 
+            font-size: 10px;
+            text-transform: uppercase;
+            text-indent: 10px;
+        }
+        
+        .feedback-userrating img{
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: -3px;
+            float: none;
+            width: 10px;
+        }
+        
+
+        .worldmap{
+            position: relative;
+            margin-top: 60px;
+        }
+        
+        .worldmap-layer1{
+            z-index: 1;
+        }
+        
+        .worldmap img{
+            width: 100%;
+        }
+        
+        .worldmap-zoom-icon{
+            position: absolute;
+            width: 25px;
+            height: 27px;
+            top: 0;
+            right: 0;
+            z-index: 999;
+            background: url(//asia-public.foodpanda.com/marketing/production/in/images/nl/about/zoom-icon.png) no-repeat center;
+            background-size: contain;
+        }
+        
+        .food{
+            width: 100%;
+            padding: 0 !important;
+        }
+        
+        .food img{
+            width: 100%;
+        }
+        
+        .social-wrap{
+            width: 174px;
+            margin: 30px auto 30px auto;
+        }
+        
+        .social-icon{
+            display: block;
+            float: left;
+            width: 48px;
+            height: 48px;
+            margin: 0 10px 20px 0;
+            text-indent: -9999px;
+            overflow: hidden;
+            opacity: .8;
+            transition: all .3s ease-out;
+            -moz-transition: all .3s ease-out;
+            -webkit-transition: all .3s ease-out;
+        }
+        
+        .social-icon:hover{
+            opacity: 1;
+            transition: all .3s ease-out;
+            -moz-transition: all .3s ease-out;
+            -webkit-transition: all .3s ease-out;
+        }
+        
+       
+        
+        
+        
+       
+        
+       
+        
+        
+        
+        
+        
+        
+        
+      

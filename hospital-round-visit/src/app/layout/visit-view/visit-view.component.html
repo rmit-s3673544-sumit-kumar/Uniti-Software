@@ -1,0 +1,66 @@
+<mat-card style="background-color: #3f51b5;color:white">Visit View</mat-card> <br>
+
+<div id="contentToConvert" style="padding:5%">
+
+  <div class="row">
+    <div class="col-md-3 borderStyle">
+      <div *ngIf="roundList">Worker Name : <span class="color-red">{{roundList.employee.firstName | titlecase}}</span>
+      </div>
+    </div>
+    <div class="col-md-6"></div>
+    <div *ngIf="roundList" class="col-md-3 borderStyle">
+      Date : <span class="color-red">{{roundList.date | date}}</span>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="mat-elevation-z8">
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="width-15">Client</th>
+          <th class="width-15">Start Time</th>
+          <th class="width-15">End Time</th>
+          <th class="width-10">Duration</th>
+          <th class="width-15">Address</th>
+          <th class="width-10">Status</th>
+          <th class="width-20">FTA Reason</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vis of visit">
+          <td class="width-15 wordBreak">{{vis.client}}</td>
+          <td class="width-15 wordBreak">{{vis.startTime}}</td>
+          <td class="width-15 wordBreak">{{vis.endTime}}</td>
+          <td class="width-10 wordBreak">{{vis.duration}}</td>
+          <td class="width-15 wordBreak">{{vis.address}}</td>
+
+          <td class="width-10 wordBreak">
+            <span *ngIf="vis.status == true" style="color:green">Done</span>
+            <span *ngIf="vis.status == false" style="color:red">Pending</span>
+          </td>
+          <td class="width-20 wordBreak">{{vis.ftareason}}</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-3 borderStyle">
+      <div *ngIf="roundList">Admin Name : <span class="color-red">{{roundList.adminName | titlecase}}</span> </div>
+    </div>
+
+    <div class="col-md-3 borderStyle" *ngIf="roundList">
+      Date : <span class="color-red">{{roundList.updatedDate | date}}</span>
+    </div>
+  </div>
+  <br>
+
+</div>
+
+<button mat-raised-button color="warn" (click)="captureScreen()">print</button>

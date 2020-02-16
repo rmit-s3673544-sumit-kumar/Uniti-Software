@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ASFIM Email</title>
+
+ <style>
+ body{
+ background-color:#CACFD2;
+ }
+       
+</style>
+</head>
+<body bgcolor="#9B59B6" style="margin: 0; padding: 0;" >
+
+	
+	<div >
+	<h3 th:text="${'Name: '+round.employee.firstName}">Name:</h3>
+	<h3 th:text="${'Date: '+#dates.format(round.date, 'dd-MMM-yyyy')}">Date:</h3>
+    </div>
+    <table align="center" border="1" cellpadding="10px" cellspacing="10px" width="100%" style="border-collapse: collapse;">
+		 <thead align="center" bgcolor="#003c8f"  >
+            <tr >
+                <th style="color:white" >S No</th>
+                <th style="color:white">Client Name</th>
+                <th style="color:white">Start Time</th>
+                <th style="color:white">End Time</th>
+                <th style="color:white">Duration (min)</th>
+            </tr>
+       </thead>  
+    
+        <tbody>
+            <tr th:each="visit,status : ${round.visit}" bgcolor="#eaeaea" align="center" style="padding: 100px 90px 100px 90px;">
+                <td th:text="${status.index+1}">index</td>
+                <td th:text="${visit.client}">client</td>
+                <td th:text="${#temporals.format(visit.startTime,'HH:mm')}">startTime</td>
+                <td th:text="${#temporals.format(visit.endTime,'HH:mm')}">endTime</td>
+                <td th:text="${visit.duration}">duration</td>
+               
+            </tr>
+        </tbody>
+    </table>
+    
+</body>
+</html>

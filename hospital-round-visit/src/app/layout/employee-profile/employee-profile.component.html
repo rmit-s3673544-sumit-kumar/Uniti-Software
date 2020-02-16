@@ -1,0 +1,30 @@
+<mat-card style="background-color: #3f51b5;color:white">Your Profile</mat-card> <br>
+ 
+
+<mat-card class="example-card" *ngIf="flag">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{employeeData.firstName}}</mat-card-title>
+        <mat-card-subtitle>{{employeeData.roles.roleName}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content> 
+            <mat-grid-list cols="2" rowHeight="70px">
+                    <mat-grid-tile>First Name</mat-grid-tile>
+                    <mat-grid-tile>{{employeeData.firstName | titlecase}}</mat-grid-tile>
+                    
+                    <mat-grid-tile>Last Name</mat-grid-tile>
+                    <mat-grid-tile>{{employeeData.lastName | titlecase}}</mat-grid-tile>
+
+                    <mat-grid-tile>Date of Birth</mat-grid-tile>
+                    <mat-grid-tile>{{employeeData.dob | date}}</mat-grid-tile>
+
+                    <mat-grid-tile>Gender</mat-grid-tile>
+                    <mat-grid-tile>{{employeeData.gender | titlecase}}</mat-grid-tile>
+ 
+                    <mat-grid-tile>Mobile Number</mat-grid-tile>
+                    <mat-grid-tile>{{employeeData.number}}</mat-grid-tile> 
+
+                  </mat-grid-list> 
+    </mat-card-content>
+
+</mat-card>

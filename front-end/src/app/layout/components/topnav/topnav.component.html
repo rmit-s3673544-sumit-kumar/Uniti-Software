@@ -1,0 +1,47 @@
+<mat-toolbar color="primary" class="fix-nav" style="height:16px;background-color: #087f23"></mat-toolbar>
+<mat-toolbar color="primary" class="fix-nav" style="height:45px;background-color:#4caf50">
+
+    <button type="button" mat-icon-button class="visible-md" (click)="toggleSidebar()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+
+    <div class="mb-20" fxFlex fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" style="margin-top: 1.5%;">
+        <div [fxFlex]="30">
+            <div>
+                <span>Hospital Management</span>
+            </div>
+        </div>
+        <div [fxFlex]="50">
+
+        </div>
+        <div [fxFlex]="10" style="padding-top: 5px;">
+            Hello {{userName | titlecase}} !
+        </div>
+        <div [fxFlex]="10" style="padding-left: 3%;">
+            <button class="hidden-sm" mat-icon-button [matMenuTriggerFor]="profile">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+
+            <mat-menu #profile="matMenu">
+                <a mat-menu-item [routerLink]="['/employee-profile']">
+                    <mat-icon>person</mat-icon>
+                    <span>{{ 'Profile' | translate }}</span>
+                </a>
+                <a mat-menu-item [routerLink]="['/employee-profile']">
+                    <mat-icon>inbox</mat-icon>
+                    <span>{{ 'Inbox' | translate }}</span>
+                </a>
+                <a mat-menu-item [routerLink]="['/employee-profile']">
+                    <mat-icon>settings</mat-icon>
+                    <span>{{ 'Settings' | translate }}</span>
+                </a>
+            </mat-menu>
+
+            <button mat-icon-button (click)="onLoggedout()">
+                <mat-icon>exit_to_app</mat-icon>
+            </button>
+        </div>
+
+    </div>
+
+</mat-toolbar>

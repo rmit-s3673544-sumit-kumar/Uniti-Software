@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>please enter user name & password for <span style="color:cornflowerblue;font-size: 40px;">{{data.user}}</span></h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="profileForm" class="example-form" (ngSubmit)="onSubmit(profileForm.value)">
+
+    <p>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="User Name" formControlName="username">
+        </mat-form-field>
+  
+      </p>
+  
+      <p>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" formControlName="password">
+        </mat-form-field>
+      </p>  
+      <p formGroupName="roles">
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="Role" formControlName="roleId">
+              <mat-option value="1">Admin</mat-option>
+              <mat-option value="2">Employee</mat-option> 
+          </mat-select>
+      </mat-form-field>
+      </p>
+</form>
+</div>  
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" class="mat-raised-button">Close</button>
+  <button mat-button [mat-dialog-close]="" (click)="save(profileForm.value)" cdkFocusInitial class="mat-raised-button" style="background: dodgerblue;margin-left: 10%;">Save</button>
+</div>

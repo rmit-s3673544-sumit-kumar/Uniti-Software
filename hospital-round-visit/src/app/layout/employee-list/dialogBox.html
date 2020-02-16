@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>please enter user name & password for <span style="color:cornflowerblue;font-size: 40px;">{{data.user}}</span></h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="profileForm" class="example-form">
+
+    <p>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="User Name" formControlName="username">
+        </mat-form-field>
+  
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" formControlName="password">
+        </mat-form-field>
+      </p>   
+</form>
+</div>  
+<mat-error *ngIf="userExistError" style="margin-top: -18px;margin-bottom: 3px;">User Name already exist</mat-error>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" class="mat-raised-button">Close</button>
+  <button mat-button [disabled]="profileForm.invalid" (click)="save(profileForm.value)" cdkFocusInitial class="mat-raised-button" style="background: dodgerblue;margin-left: 10%;">Save</button>
+</div>

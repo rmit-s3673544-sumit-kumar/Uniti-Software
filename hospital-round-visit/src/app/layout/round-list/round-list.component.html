@@ -1,0 +1,51 @@
+<mat-card style="background-color: #3f51b5;color:white">Round List</mat-card> <br>
+
+<div *ngIf="isRecordEmpty">
+  <h2 style="color:red; margin: 15% 0 0 20%;">
+    NO ROUNDS FOUND CREATE ONE !
+  </h2>
+</div>
+<div class="mat-elevation-z8"  *ngIf="!isRecordEmpty">
+<table mat-table [dataSource]="roundListAll" class="mat-elevation-z8">
+
+  
+  <ng-container matColumnDef="roundid">
+    <th mat-header-cell *matHeaderCellDef class="heading-color width-20">Round No.</th>
+    <td mat-cell *matCellDef="let element"> {{element.roundId}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="empname">
+    <th mat-header-cell *matHeaderCellDef class="heading-color width-20"> Employee </th>
+    <td mat-cell *matCellDef="let element"> {{element.employee.firstName}} </td>
+  </ng-container>
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef class="heading-color width-20"> Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+  </ng-container> 
+  <ng-container matColumnDef="viewList">
+    <th mat-header-cell *matHeaderCellDef class="heading-color width-20"> View List </th>
+    <td mat-cell *matCellDef="let element">
+      <i class="material-icons pointercls" (click)="viewList(element.roundId)" > remove_red_eye </i> 
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef class="heading-color width-20"> Edit </th>
+    <td mat-cell *matCellDef="let element">
+      <i class="material-icons pointercls" (click)="edit(element.roundId)" > edit </i> 
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef class="heading-color width-20"> Delete </th>
+    <td mat-cell *matCellDef="let element">
+      <i class="material-icons pointercls" (click)="delete(element.roundId)">
+        delete_sweep
+      </i>  
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+</table>
+<mat-paginator  [length]="roundListAll.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">  </mat-paginator>
+ 
+</div>

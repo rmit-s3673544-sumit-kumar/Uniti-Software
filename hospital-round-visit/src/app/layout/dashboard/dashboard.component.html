@@ -1,0 +1,15 @@
+<div *ngIf="isAvailable" class="mb-20" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="20px">
+    <div fxFlex>
+        <app-stat [bgClass]="'danger'" [icon]="'people'" [count]="dashboardData.empCount" [label]="'Employees!'"></app-stat>
+    </div>
+    <div fxFlex>
+        <app-stat [bgClass]="'warn'" [icon]="'loop'" [count]="dashboardData.roundCount" [label]="'Rounds!'"></app-stat>
+    </div>
+    <div fxFlex>
+        <app-stat [bgClass]="'success'" [icon]="'graphic_eq'" [count]="dashboardData.visitCount" [label]="'Visits!'"></app-stat>
+    </div>
+    <div fxFlex>
+        <app-stat [bgClass]="'info'" [icon]="'sentiment_very_satisfied'" [count]="dashboardData.clientCount" [label]="'Clients!'"></app-stat>
+    </div>
+</div>
+  

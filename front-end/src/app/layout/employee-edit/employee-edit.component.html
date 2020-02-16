@@ -1,0 +1,49 @@
+<mat-card style="background-color: #4caf50;color:white">Edit Employee</mat-card>
+
+<div style="margin: 0% 25% 20% 20%">
+  <form [formGroup]="profileForm" class="example-form" (ngSubmit)="onSubmit(profileForm.value)">
+
+    <p>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="First Name" formControlName="firstName">
+      </mat-form-field>
+
+    </p>
+
+    <p>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Last Name" formControlName="lastName">
+      </mat-form-field>
+    </p>
+
+    <p>
+
+      <mat-radio-group aria-label="Gender" formControlName="gender">
+        <mat-radio-button value="male">Male</mat-radio-button> &nbsp;&nbsp;
+        <mat-radio-button value="female">Female</mat-radio-button>
+      </mat-radio-group>
+    </p>
+
+    <!-- <p> 
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email" formControlName="email">
+      </mat-form-field>
+    </p> -->
+    <p>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Date Of Birth" formControlName="dob">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Mobile Number" formControlName="number">
+      </mat-form-field>
+    </p>
+    <button mat-raised-button color="primary">Update</button>
+  </form>
+
+</div>

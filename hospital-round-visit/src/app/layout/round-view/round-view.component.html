@@ -1,0 +1,90 @@
+<mat-card style="background-color: #3f51b5;color:white">View Round</mat-card>
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+  <mat-step [stepControl]="dateFrom">
+    <form [formGroup]="dateFrom" (ngSubmit)="getRoundsByDate(dateFrom.value)" nonvalidate>
+      <ng-template matStepLabel>Select Date</ng-template>
+      <br>
+      <br>
+      <br>
+      <p>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker1" placeholder="Select Date" formControlName="date" required>
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </p>
+      <br>
+      <br>
+      <br>
+      <div>
+        <button type="Submit" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Round List</ng-template>
+
+      <br>
+      <br>
+      <div *ngIf="isRecordEmpty">
+        <h2 style="color:red; margin: 10% 0 5% 20%;">
+          NO ROUNDS FOUND FOR THE GIVEN DATE !
+        </h2>
+      </div>
+      <div class="mat-elevation-z8" *ngIf="!isRecordEmpty">
+        <table mat-table [dataSource]="roundList" class="mat-elevation-z8">
+
+
+          <ng-container matColumnDef="roundid">
+            <th mat-header-cell *matHeaderCellDef class="heading-color width-20">Round No.</th>
+            <td mat-cell *matCellDef="let element"> {{element.roundId}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="empname">
+            <th mat-header-cell *matHeaderCellDef class="heading-color width-20"> Employee </th>
+            <td mat-cell *matCellDef="let element"> {{element.employee.firstName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef class="heading-color width-20"> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="viewList">
+            <th mat-header-cell *matHeaderCellDef class="heading-color width-20"> View List </th>
+            <td mat-cell *matCellDef="let element">
+              <i class="material-icons pointercls" (click)="viewList(element.roundId)"> remove_red_eye </i>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef class="heading-color width-20"> Edit </th>
+            <td mat-cell *matCellDef="let element">
+              <i class="material-icons pointercls" (click)="edit(element.roundId)"> edit </i>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef class="heading-color width-20"> Delete </th>
+            <td mat-cell *matCellDef="let element">
+              <i class="material-icons pointercls" (click)="delete(element.roundId)">
+                delete_sweep
+              </i>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewVisit(row.roundId)"></tr>
+        </table>
+
+      </div>
+      <br>
+      <br>
+      <br>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+      </div>
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>
